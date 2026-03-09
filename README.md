@@ -341,13 +341,31 @@ The VITON-HD dataset provides all pre-computed inputs ready to use.
 
 ## Results
 
+### Model Comparison
+
 | Model | SSIM | PSNR | Notes |
 |-------|------|------|-------|
 | LightTryOnNet v1 (baseline) | 0.12 | ~14 dB | CPU-only, 600 pairs, broken TPS |
 | Dense-Flow v3 (from scratch) | ~0.60 | ~22 dB | AMP, SSIM loss, 5000 pairs |
 | **HR-VITON v4 (pretrained)** | **~0.85** | **~27 dB** | Official weights, 768×1024 |
 
-Sample outputs are in `v4_output/` and `v4_qualitative.png`.
+### Qualitative Results — HR-VITON v4 (Unpaired Try-On)
+
+Each column shows: **Person (GT)** → **Target Cloth** → **Warped Cloth** → **Try-On Output**
+
+![HR-VITON Qualitative Results](v4_qualitative.png)
+
+### Metric Distributions — Paired Evaluation (v4)
+
+SSIM, PSNR, and MSE distributions across the test set (paired setting — same cloth as worn in GT).
+
+![Metric Distributions](v4_metrics_hist.png)
+
+### Classical Baseline Results
+
+Parse-map guided cloth warp with Gaussian feathering (no deep learning).
+
+![Classical Baseline](classical_results.png)
 
 ---
 
