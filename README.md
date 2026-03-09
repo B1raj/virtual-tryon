@@ -369,6 +369,65 @@ Parse-map guided cloth warp with Gaussian feathering (no deep learning).
 
 ---
 
+## Exploratory Data Analysis
+
+EDA was performed across all notebook iterations on the VITON-HD dataset
+(11,647 train / 2,032 test pairs at 768×1024).
+
+### Sample Pairs (v1 & v2)
+
+Each row shows one training pair: person image, target garment, cloth mask,
+parse map, DensePose, and OpenPose skeleton overlay.
+
+![Sample Pairs](eda_sample_pairs.png)
+
+### Image Statistics (v1)
+
+Per-channel mean and standard deviation across the training set for person
+images and garments — confirms consistent normalisation.
+
+![Image Statistics](eda_image_stats.png)
+
+### Parse-Map Label Analysis (v1 & v2)
+
+Pixel frequency per semantic label (0 = Background, 5 = Upper-clothes,
+13–15 = Limbs, etc.). Label 5 is the primary supervision signal for cloth
+warping.
+
+![Parse Map Analysis](eda_parse_map.png)
+
+### OpenPose Keypoint Analysis (v1 & v2)
+
+Heatmap of BODY_25 keypoint confidence and spatial distribution across the
+dataset. Upper-body points (shoulders, elbows, wrists) guide GMM cloth
+alignment.
+
+![Keypoint Analysis](eda_keypoints.png)
+
+### Cloth-Mask Coverage (v1)
+
+Distribution of cloth-mask pixel coverage (proportion of image occupied by
+the garment). Informs augmentation bounds and warp regularisation.
+
+![Cloth Mask Coverage](eda_cloth_mask.png)
+
+### Colour Distribution (v1)
+
+KDE plots of RGB channels for person images vs. garments. Near-identical
+distributions confirm the dataset is balanced and no colour-shift correction
+is needed.
+
+![Colour Distribution](eda_color_dist.png)
+
+### Data Pipeline Verification (v1–v3)
+
+End-to-end sanity check: raw inputs → augmented tensors → classical warp
+output, verifying all five modalities load and align correctly.
+
+![Pipeline Verification](pipeline_verification.png)
+
+---
+
 ## References
 
 - Lee et al., *High-Resolution Virtual Try-On with Misalignment and Occlusion-Handled Conditions*, ECCV 2022
