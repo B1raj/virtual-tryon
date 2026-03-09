@@ -636,12 +636,12 @@ os.makedirs(opt.output_dir, exist_ok=True)
 
 # Re-run full inference saving images to disk
 print(f"Saving outputs to {opt.output_dir}/")
-for idx, r in enumerate(results):
+for idx, r in enumerate(unpaired_results):
     out_tensor = r["output"].unsqueeze(0)  # 1,C,H,W in [-1,1]
     out_path = os.path.join(opt.output_dir, f"result_{idx:04d}.jpg")
     save_image(out_tensor * 0.5 + 0.5, out_path)
 
-print(f"✓ {len(results)} images saved to {opt.output_dir}/")
+print(f"✓ {len(unpaired_results)} images saved to {opt.output_dir}/")
 """))
 
 # ── 13. Detailed Metrics Table ────────────────────────────────────────────────
